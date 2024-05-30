@@ -23,7 +23,7 @@ const Questions = () => {
     }
 
     useEffect(() => {
-        fetch('https://7456057c4b1d3b48943bf74b.mockapi.io/mockapi')
+        fetch('https://7756257b3c1d3b60293bf74b.mockapi.io/mockapi')
             .then(response => response.json())
             .then(data => setQuestions(data))
             .catch(error => console.error('Error fetching data:', error));
@@ -59,6 +59,11 @@ const Questions = () => {
                     <div className="px-2">
                         <p className="mb-10 font-medium text-gray-900 md:text-2xl text-slate-900 font-semibold"><span
                             className="me-2">{data.id}.</span>{data.question}</p>
+                        {data.images && (
+                            <div className="my-10">
+                                <img src={`../public/${data.images}.PNG`} alt="ART"/>
+                            </div>
+                        )}
                         {data.answers.map((item, index) => (
                             <div className="flex mb-4 items-center">
                                 <div className="flex items-center h-5">
