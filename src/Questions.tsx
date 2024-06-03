@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from "./components/Button.tsx";
 
 interface Questions {
@@ -20,6 +20,11 @@ const Questions = () => {
         fontColorDefault();
         setCurrentDiv(prev => Math.max(prev - 1, 1));
     }
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const div: number = parseInt(event.target.value);
+        div && setCurrentDiv(div);
+    };
 
     const fontColorDefault = () => {
         const itemElements = document.querySelectorAll('.item');
@@ -70,8 +75,9 @@ const Questions = () => {
                             <h1 className="mt-8 text-3xl font-semibold contents text-indigo-500 dark:text-indigo-400">
                                 Рачунарски Хардвер
                             </h1>
-                            <div className="flex text-4xl">
-                                <p>{index + 1}</p>/<p>{questions.length}</p>
+                            <div className="flex text-4xl gap-2">
+                                <input className="border flex p-1 w-10" onChange={handleChange} value={index + 1}/>/
+                                <p className="p-1">{questions.length}</p>
                             </div>
                         </div>
 
@@ -109,7 +115,9 @@ const Questions = () => {
                             <a onClick={() => getAnswers(currentDiv)}>
                                 <Button text="Odgovor" bgColor="bg-green-50" textColor="text-green-700"/>
                             </a>
-                            <Button text="Završi" bgColor="bg-red-50" textColor="text-red-700"/>
+                            <a onClick={() => window.location.reload()}>
+                                <Button text="Završi" bgColor="bg-red-50" textColor="text-red-700"/>
+                            </a>
                         </div>
                     </div>
                 );
