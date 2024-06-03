@@ -12,6 +12,11 @@ const Questions = () => {
     const [questions, setQuestions] = useState([]);
     const [currentDiv, setCurrentDiv] = useState(1);
 
+    useEffect(() => {
+        const timeout = setTimeout(() => alert('Крај теста, време је истекло'), 90 * 60 * 1000);
+        return () => clearTimeout(timeout);
+    }, []);
+
     const onNextClick = () => {
         fontColorDefault();
         setCurrentDiv(prev => Math.min(prev + 1, questions.length));
